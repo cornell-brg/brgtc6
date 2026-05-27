@@ -1,0 +1,11 @@
+`ifndef BRGTC6_TOP_PARAMS
+`define BRGTC6_TOP_PARAMS
+
+`define BRGTC6_CHANNEL_WIDTH     8
+`define BRGTC6_CONFIG_WIDTH      12
+`define BRGTC6_MAX_CREDIT        16
+`define BRGTC6_CLK_WIDTH         12
+`define BRGTC6_ADDR_WIDTH        5
+`define BRGTC6_RESP_BUFFER_DEPTH 4
+
+`endif
