@@ -1,4 +1,6 @@
 build*/
+_build*/
+local/
 obj_dir/
 .DS_STORE
 __pycache__/

@@ -16,9 +16,9 @@ a throughput of 1.6 Gb/s at 200 MT/s in post-silicon testing.
 For the full architectural description and post-silicon results, see the
 [project report](https://www.csl.cornell.edu/~cbatten/pdfs/lyu-brgtc6-cureport2025.pdf).
 
-## Block Diagram of the C2C V1 Design
+## Block Diagram of the BRGTC6 Design
 
-<img src="docs/C2C Link V1 Diagram.svg" width="1000">
+<img src="docs/_static/img/Arch_V1_Redraw.png" width="1000">
 
 ## Repository layout
 
