@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Integration Tests &mdash; BRGTC6  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/logo.css?v=0320fe47" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/table.css?v=09be579f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/image.css?v=c42c1b78" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Test Environment/Infrastructure" href="../test_environment/" />
+    <link rel="prev" title="Design Verification" href="../verification/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            BRGTC6
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Background Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/">Background Information</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTL Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/rtl_design/">RTL Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/design_overview/">BRGTC6 RTL Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/config_interface/">BRGTC6 Config Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Design Verification</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../verification/">Design Verification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Integration Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#standard-integration-tests-duallinkv4-test-sv">Standard Integration Tests (DualLinkV4-test.sv)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-case-types">Test Case Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lfsr-tests-w-equal-clock-periods">LFSR Tests w/ Equal Clock Periods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed-pattern-tests-w-equal-clock-periods">Fixed Pattern Tests w/ Equal Clock Periods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#channel-message-tests-pattern-bypass-w-equal-clock-periods">Channel Message Tests (Pattern Bypass) w/ Equal Clock Periods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unequal-clock-period-tests">Unequal Clock Period Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crc-error-generation-tests">CRC Error Generation Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repair-tests">Repair Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-counter-tests">Debug Counter Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#long-tests-take-too-long-with-verilator">Long Tests (Take Too Long with Verilator)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#backpressure-integration-tests-duallinkv4backpressure-test-sv">Backpressure Integration Tests (DualLinkV4Backpressure-test.sv)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#integrationtests-testcasetypes-1">Test Case Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#one-way-message-tests">One-Way Message Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#two-way-message-tests">Two-Way Message Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#config-message-tests">Config Message Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../test_environment/">Test Environment/Infrastructure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Post-Silicon Validation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../post_silicon/daughter_boards/">Daughter Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../post_silicon/tester_board/">Tester Board</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">BRGTC6</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Integration Tests</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cornell-brg/brgtc6/blob/main/docs/verification/integration_tests.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="integration-tests">
+<h1>Integration Tests<a class="headerlink" href="#integration-tests" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="#IntegrationTests-StandardIntegrationTests(DualLinkV4-test.sv)">Standard Integration Tests (DualLinkV4-test.sv)</a></p>
+<ul>
+<li><p><a class="reference external" href="#IntegrationTests-TestCaseTypes">Test Case Types</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-LFSRTestsw/EqualClockPeriods">LFSR Tests w/ Equal Clock Periods</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-FixedPatternTestsw/EqualClockPeriods">Fixed Pattern Tests w/ Equal Clock Periods</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-ChannelMessageTests(PatternBypass)w/EqualClockPeriods">Channel Message Tests (Pattern Bypass) w/ Equal Clock Periods</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-UnequalClockPeriodTests">Unequal Clock Period Tests</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-CRCErrorGenerationTests">CRC Error Generation Tests</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-RepairTests">Repair Tests</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-DebugCounterTests">Debug Counter Tests</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-LongTests(TakeTooLongwithVerilator)">Long Tests (Take Too Long with Verilator)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#IntegrationTests-BackpressureIntegrationTests(DualLinkV4Backpressure-test.sv)">Backpressure Integration Tests (DualLinkV4Backpressure-test.sv)</a></p>
+<ul>
+<li><p><a class="reference external" href="#IntegrationTests-TestCaseTypes.1">Test Case Types</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-One-WayMessageTests">One-Way Message Tests</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-Two-WayMessageTests">Two-Way Message Tests</a></p></li>
+<li><p><a class="reference external" href="#IntegrationTests-ConfigMessageTests">Config Message Tests</a></p></li>
+</ul>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><strong>NOTE: This section only goes over the V4 integration test cases with two links talking to each other since they include all the tests earlier versions have and more</strong></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="standard-integration-tests-duallinkv4-test-sv">
+<span id="integrationtests-standardintegrationtests-duallinkv4-test-sv"></span><h2>Standard Integration Tests (DualLinkV4-test.sv)<a class="headerlink" href="#standard-integration-tests-duallinkv4-test-sv" title="Link to this heading"></a></h2>
+<section id="test-case-types">
+<span id="integrationtests-testcasetypes"></span><h3>Test Case Types<a class="headerlink" href="#test-case-types" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">test_standard_pattern_two_way</span></code> <strong>(referred to as TCT1 below)</strong></p></li>
+<li><ul>
+<li><p>Configures both links to use the pattern generators and checkers</p></li>
+<li><p>Configures user-provided DUT values including clock divider factors, clock skew factors, pattern modes and repair selects</p></li>
+<li><p>Configures testbench element values including injected skew and bit-error enables</p></li>
+<li><p>Checks all user-provided config values against returned value from configuration interface</p></li>
+<li><p>Checks pattern state to ensure it is locked at the end of the test</p></li>
+<li><p>Checks debug counters if appropriate input set</p></li>
+<li><p>Checks CRC error bit if appropriate input set</p></li>
+<li><p>Checks received fixed patterns are correct if in fixed-pattern mode</p></li>
+<li><p>Checks to ensure all messages were successfully sent and received</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_standard_msg_two_way</span></code> <strong>(referred to as TCT2 below)</strong></p></li>
+<li><ul>
+<li><p>Configures both links to bypass the pattern generators and checkers - uses channel messages provided through config instead</p></li>
+<li><p>Configures user-provided DUT values including clock divider factors, clock skew factors, pattern modes and repair selects</p></li>
+<li><p>Configures testbench element values including injected skew and bit-error enables</p></li>
+<li><p>Checks all user-provided config values against returned value from configuration interface</p></li>
+<li><p>Checks all channel messages sent on the respective sending side are received in order and to completion on the receiving side</p></li>
+<li><p>Checks to ensure all messages were successfully sent and received</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="lfsr-tests-w-equal-clock-periods">
+<span id="integrationtests-lfsrtestsw-equalclockperiods"></span><h3>LFSR Tests w/ Equal Clock Periods<a class="headerlink" href="#lfsr-tests-w-equal-clock-periods" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_all_skew_0</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>No skew</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_under_deskew_thresh_rand_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_under_deskew_thresh_alt_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>Skew that is the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_at_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>Random skew between 0 and the value that is just at the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_5x_over_deskew_thresh_rand_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>Random skew between 0 and 5 times the clock period</p></li>
+<li><p>Clock divider and deskewing value set manually to simulate configuration with actual chip</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_5x_over_deskew_thresh_alt_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>Skew that is 5 times the clock period</p></li>
+<li><p>Clock divider and deskewing value set manually to simulate configuration with actual chip</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_highest_freq_under_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 167 MHz (highest supported frequency) clock on both chips</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_rand_freq_under_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with random clock frequency that is equal on both chips</p></li>
+<li><p>Skew that is the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="fixed-pattern-tests-w-equal-clock-periods">
+<span id="integrationtests-fixedpatterntestsw-equalclockperiods"></span><h3>Fixed Pattern Tests w/ Equal Clock Periods<a class="headerlink" href="#fixed-pattern-tests-w-equal-clock-periods" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed_eq_rand_freq_under_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with random clock frequency that is equal on both chips</p></li>
+<li><p>Skew that is the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="channel-message-tests-pattern-bypass-w-equal-clock-periods">
+<span id="integrationtests-channelmessagetests-patternbypass-w-equalclockperiods"></span><h3>Channel Message Tests (Pattern Bypass) w/ Equal Clock Periods<a class="headerlink" href="#channel-message-tests-pattern-bypass-w-equal-clock-periods" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">single_msg_eq_rand_freq_under_deskew_thresh</span></code> (TCT2)</p>
+<ol class="arabic simple">
+<li><p>Confirm single input message on one side equals single output message on the other side with random clock frequency that is equal on both chips</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rand_msgs_eq_rand_freq_under_deskew_thresh</span></code> (TCT2)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (random number of) input messages on one side equal all output messages on the other side with random clock frequency that is equal on both chips</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="unequal-clock-period-tests">
+<span id="integrationtests-unequalclockperiodtests"></span><h3>Unequal Clock Period Tests<a class="headerlink" href="#unequal-clock-period-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_50_mhz_under_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 50 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_25_mhz_under_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 25 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_uneq_rand_mhz_under_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="crc-error-generation-tests">
+<span id="integrationtests-crcerrorgenerationtests"></span><h3>CRC Error Generation Tests<a class="headerlink" href="#crc-error-generation-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_25_mhz_under_deskew_thresh_error_1</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 25 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>Testbench Errorer unit introduces errors (bits flipped) on 3 of the bits of the credit interface from side 1 to side 2</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed_uneq_rand_freq_under_deskew_thresh_error_both</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>Testbench Errorer unit introduces errors (bits flipped) on an odd number of the bits of the credit interface from side 1 to side 2 and side 2 to side 1</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed_uneq_rand_freq_under_deskew_thresh_error_2</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>Testbench Errorer unit introduces errors (bits flipped) on 3 of the bits of the credit interface from side 2 to side 1</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="repair-tests">
+<span id="integrationtests-repairtests"></span><h3>Repair Tests<a class="headerlink" href="#repair-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_25_mhz_under_deskew_thresh_repair_msg_bit</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 25 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>Testbench Errorer unit introduces error (bit flipped) on MSB of the message bits of the credit interface from side 1 to side 2</p></li>
+<li><p>Repair offset is set on both side 1 and side 2 to bypass this lane through the repair lane</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_25_mhz_under_deskew_thresh_repair_clk_bit</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 25 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>Testbench Errorer unit introduces error (bit flipped) on clock bit of the credit interface from side 2 to side 1</p></li>
+<li><p>Repair offset is set on both side 1 and side 2 to bypass this lane through the repair lane</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="debug-counter-tests">
+<span id="integrationtests-debugcountertests"></span><h3>Debug Counter Tests<a class="headerlink" href="#debug-counter-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_25_mhz_under_deskew_thresh_repair_clk_bit</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 25 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>Testbench Errorer unit introduces error (bit flipped) on clock bit of the credit interface from side 2 to side 1</p></li>
+<li><p>Repair offset is set on both side 1 and side 2 to bypass this lane through the repair lane</p></li>
+<li><p>Debug counters are read and compared against expected values</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="long-tests-take-too-long-with-verilator">
+<span id="integrationtests-longtests-taketoolongwithverilator"></span><h3>Long Tests (Take Too Long with Verilator)<a class="headerlink" href="#long-tests-take-too-long-with-verilator" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_100x_over_deskew_thresh_rand_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>Random skew between 0 and 100 times the clock period</p></li>
+<li><p>Clock divider and deskewing value set manually to simulate configuration with actual chip</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_eq_100_mhz_100x_over_deskew_thresh_alt_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on both chips</p></li>
+<li><p>Skew that is 100 times the clock period</p></li>
+<li><p>Clock divider and deskewing value set manually to simulate configuration with actual chip</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_25_mhz_100x_over_deskew_thresh_rand_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 25 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and 100 times the clock period</p></li>
+<li><p>Clock divider and deskewing value set manually to simulate configuration with actual chip</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lfsr_100_25_mhz_100x_over_deskew_thresh_alt_skew</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm no error count detected from PatternChk with 100 MHz clock on one chip and 25 MHz clock on other chip</p></li>
+<li><p>Skew that is 100 times the clock period</p></li>
+<li><p>Clock divider and deskewing value set manually to simulate configuration with actual chip</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ten_msgs_100_5_mhz_under_deskew_thresh_rand_skew</span></code> (TCT2)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (10) input messages on one side equal all output messages on the other side with100 MHz clock on one chip and 5 MHz clock on other chip</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ten_msgs_100_5_mhz_under_deskew_thresh_alt_skew</span></code> (TCT2)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = 10) input messages on one side equal all output messages on the other side with100 MHz clock on one chip and 5 MHz clock on other chip</p></li>
+<li><p>Skew that is the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="backpressure-integration-tests-duallinkv4backpressure-test-sv">
+<span id="integrationtests-backpressureintegrationtests-duallinkv4backpressure-test-sv"></span><h2>Backpressure Integration Tests (DualLinkV4Backpressure-test.sv)<a class="headerlink" href="#backpressure-integration-tests-duallinkv4backpressure-test-sv" title="Link to this heading"></a></h2>
+<section id="integrationtests-testcasetypes-1">
+<span id="id1"></span><h3>Test Case Types<a class="headerlink" href="#integrationtests-testcasetypes-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">test_send_all_wait_receive_all_one_way</span></code> <strong>(referred to as TCT1 below)</strong></p></li>
+<li><ul>
+<li><p>Configures both links to bypass the pattern generators and checkers - uses channel messages provided through config instead</p></li>
+<li><p>Configures user-provided DUT values including clock divider factors and clock skew factors</p></li>
+<li><p>Configures testbench element values including injected skew and bit-error enables</p></li>
+<li><p>Sends all messages <em>on one send side</em> with random delays between each message (other send side is idle)</p></li>
+<li><p>Waits a random, long amount of time before receiving messages</p></li>
+<li><p>Receives and checks all messages <em>on corresponding receive side</em> are received in order and to completion with random delays for sink readiness</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_send_all_wait_receive_all_two_way</span></code> <strong>(referred to as TCT2 below)</strong></p></li>
+<li><ul>
+<li><p>Configures both links to bypass the pattern generators and checkers - uses channel messages provided through config instead</p></li>
+<li><p>Configures user-provided DUT values including clock divider factors and clock skew factors</p></li>
+<li><p>Configures testbench element values including injected skew and bit-error enables</p></li>
+<li><p>Sends all messages <em>on respective send sides</em> with random delays between each message</p></li>
+<li><p>Waits a random, long amount of time before receiving messages</p></li>
+<li><p>Receives and checks all messages <em>on respective receive sides</em> are received in order and to completion with random delays for sink readiness</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_interlaced_one_way</span></code> <strong>(referred to as TCT3 below)</strong></p></li>
+<li><ul>
+<li><p>Configures both links to bypass the pattern generators and checkers - uses channel messages provided through config instead</p></li>
+<li><p>Configures user-provided DUT values including clock divider factors and clock skew factors</p></li>
+<li><p>Configures testbench element values including injected skew and bit-error enables</p></li>
+<li><p>The following two actions happen concurrently <em>on one pair of send/receive units only</em></p>
+<ul>
+<li><p>Sends segments of messages with random delays between each message and then waits for a long time between each segment</p></li>
+<li><p>Waits a long time between each segment and receives segments of messages with random delays between sink readiness</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_interlaced_two_way</span></code> <strong>(referred to as TCT4 below)</strong></p></li>
+<li><ul>
+<li><p>Configures both links to bypass the pattern generators and checkers - uses channel messages provided through config instead</p></li>
+<li><p>Configures user-provided DUT values including clock divider factors and clock skew factors</p></li>
+<li><p>Configures testbench element values including injected skew and bit-error enables</p></li>
+<li><p>The following two actions happen concurrently <em>on both pairs of send/receive units</em></p>
+<ul>
+<li><p>Sends segments of messages with random delays between each message and then waits for a long time between each segment</p></li>
+<li><p>Waits a long time between each segment and receives segments of messages with random delays between sink readiness</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_config_backpressure</span></code> <strong>(referred to as TCT5 below)</strong></p>
+<ul>
+<li><p>Creates messages that map to various registers in the configuration interface</p></li>
+<li><p>Confirms the messages that are received have the same address in the correct order (data values may be different for read-only registers)</p></li>
+<li><p>The following two actions happen <em>only on one of the links</em></p>
+<ul>
+<li><p>Sends segments of messages with random delays between each message and then waits for a long time between each segment</p></li>
+<li><p>Waits a long time between each segment and receives segments of messages with random delays between sink readiness</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="one-way-message-tests">
+<span id="integrationtests-one-waymessagetests"></span><h3>One-Way Message Tests<a class="headerlink" href="#one-way-message-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">one_way_max_credit_msgs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT1)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = maximum credit) input messages on one side equal all output messages on the other side with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">one_way_thousand_msgs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT3)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = 1000) input messages on one side equal all output messages on the other side with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>1 segment of messages containing 1000 messages</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">one_way_hundred_msgs_three_segs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT3)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = 1000) input messages on one side equal all output messages on the other side with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>3 segments of messages containing 100 messages each</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="two-way-message-tests">
+<span id="integrationtests-two-waymessagetests"></span><h3>Two-Way Message Tests<a class="headerlink" href="#two-way-message-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">two_way_max_credit_msgs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT2)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = maximum credit) input messages on one side equal all output messages on the other side with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">two_way_thousand_msgs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT4)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = 1000) input messages on one side equal all output messages on the other side with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>1 segment of messages containing 1000 messages</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">two_way_hundred_msgs_three_segs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT4)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = 1000) input messages on one side equal all output messages on the other side with both chips have unequal random clock frequencies</p></li>
+<li><p>Random skew between 0 and the value that is just below the threshold when explicit deskewing is needed</p></li>
+<li><p>3 segments of messages containing 100 messages each</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="config-message-tests">
+<span id="integrationtests-configmessagetests"></span><h3>Config Message Tests<a class="headerlink" href="#config-message-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config_thousand_msgs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT5)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = 1000) input config message addresses equal the response config message addresses from the same link with random clock frequency</p></li>
+<li><p>1 segment of messages containing 1000 messages</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_hundred_msgs_three_segs_uneq_rand_freq_under_deskew_thresh</span></code> (TCT5)</p>
+<ol class="arabic simple">
+<li><p>Confirm all (num_msgs = 1000) input config message addresses equal the response config message addresses from the same link with random clock frequency</p></li>
+<li><p>3 segments of messages containing 100 messages</p></li>
+</ol>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../verification/" class="btn btn-neutral float-left" title="Design Verification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../test_environment/" class="btn btn-neutral float-right" title="Test Environment/Infrastructure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Barry Lyu, Parker Schless, Vayun Tiwari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

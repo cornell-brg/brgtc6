@@ -1,0 +1,149 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daughter Boards &mdash; BRGTC6  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/logo.css?v=0320fe47" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/table.css?v=09be579f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/image.css?v=c42c1b78" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Tester Board" href="../tester_board/" />
+    <link rel="prev" title="Test Environment/Infrastructure" href="../../verification/test_environment/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            BRGTC6
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Background Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/">Background Information</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTL Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/rtl_design/">RTL Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/design_overview/">BRGTC6 RTL Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/config_interface/">BRGTC6 Config Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Design Verification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../verification/verification/">Design Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../verification/integration_tests/">Integration Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../verification/test_environment/">Test Environment/Infrastructure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Post-Silicon Validation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Daughter Boards</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#links">Links</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tester_board/">Tester Board</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">BRGTC6</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Daughter Boards</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cornell-brg/brgtc6/blob/main/docs/post_silicon/daughter_boards.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="daughter-boards">
+<h1>Daughter Boards<a class="headerlink" href="#daughter-boards" title="Link to this heading"></a></h1>
+<p>Any daughter boards that are designed to be compatible with the Chip Tester board must implement the identical pinout to that seen on the Chip Tester Board, including pins for both voltage channels, grounds, and GPIO connections. The BRGTC6 daughter boards are quite simple, including only the 40-pin connector, 0.1uF decoupling capacitors for both voltage channels placed as close as possible to the chip pins, SMA connectors for the clock signals, as well as dedicated SPI connectors if needed. Note that the BRGTC6 single-chip daughter board does not support the Chip Tester as it is designed for standalone unit testing of the chip as well as link emulation with an FPGA. In addition, the ZIF sockets used for the BRGTC6 tapeout daughter boards are no longer manufactured. Sockets from <a class="reference external" href="https://www.arieselec.com/wp-content/uploads/2020/12/10004-pga-zif-test-and-burn-in-socket.pdf">Aries Electronics</a> should be used instead for future boards.</p>
+<section id="links">
+<span id="daughterboards-links"></span><h2>Links<a class="headerlink" href="#links" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/cornell-brg/brg-test-board">Altium Designer Single-Chip Daughter Board Source Files</a></p></li>
+<li><p><a class="reference external" href="https://github.com/cornell-brg/brg-test-board">Altium Designer Dual-Chip Daughter Board Source Files</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../verification/test_environment/" class="btn btn-neutral float-left" title="Test Environment/Infrastructure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tester_board/" class="btn btn-neutral float-right" title="Tester Board" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Barry Lyu, Parker Schless, Vayun Tiwari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

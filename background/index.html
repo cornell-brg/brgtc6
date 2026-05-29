@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Background Information &mdash; BRGTC6  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/logo.css?v=0320fe47" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/table.css?v=09be579f" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/image.css?v=c42c1b78" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=187304be"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="RTL Design" href="../rtl_design/rtl_design/" />
+    <link rel="prev" title="BRGTC6 Documentation" href="../" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            BRGTC6
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Background Information</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Background Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#objective">Objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fundamentals">Fundamentals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#metastability">Metastability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synchronizers">Synchronizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-fifo">Asynchronous FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pseudo-random-bit-stream-prbs-generator-linear-feedback-shift-register-lfsr">Pseudo-Random Bit Stream (PRBS) Generator / Linear Feedback Shift Register (LFSR)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-synchronous-interface">Source Synchronous Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis-design-constraints-sdc-files">Synopsis Design Constraints (SDC) Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#architectural-development">Architectural Development</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#a-simple-src-synchronous-interface">A Simple Src Synchronous Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-reset-problem">The Reset Problem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#credit-based-flow-control-interface">Credit-Based Flow Control Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crc-repair">CRC &amp; Repair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pattern-gen-check-bist">Pattern Gen &amp; Check (BIST)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#current-architecture-v1">Current Architecture (V1)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-interface">Configuration Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#codebase">Codebase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pdk-flow">PDK &amp; Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-methodology">Design Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTL Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rtl_design/rtl_design/">RTL Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl_design/design_overview/">BRGTC6 RTL Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rtl_design/config_interface/">BRGTC6 Config Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Design Verification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../verification/verification/">Design Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../verification/integration_tests/">Integration Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../verification/test_environment/">Test Environment/Infrastructure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Post-Silicon Validation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../post_silicon/daughter_boards/">Daughter Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../post_silicon/tester_board/">Tester Board</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">BRGTC6</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Background Information</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cornell-brg/brgtc6/blob/main/docs/background.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="background-information">
+<h1>Background Information<a class="headerlink" href="#background-information" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>This page is an introduction to the BRGTC6 project. It covers the design and development of the BRGTC6 chip, as well as any fundamental or tangential knowledge that may be helpful for understanding the project.</p>
+<p>Any outside reference that this document points to can be found in the resources section.</p>
+</div></blockquote>
+<section id="objective">
+<span id="brgtc6quickstart-objective"></span><h2>Objective<a class="headerlink" href="#objective" title="Link to this heading"></a></h2>
+<p>The primary objective of the project is to build a chip-to-chip communication link that is:</p>
+<ul class="simple">
+<li><p>Performant</p></li>
+<li><p>Modular</p></li>
+<li><p>Clean</p></li>
+<li><p>Thoroughly Tested</p></li>
+<li><p>Open Source</p></li>
+</ul>
+</section>
+<section id="fundamentals">
+<span id="brgtc6quickstart-fundamentals"></span><h2>Fundamentals<a class="headerlink" href="#fundamentals" title="Link to this heading"></a></h2>
+<p>Talking between chips requires an asynchronous design, whereas asynchronous designs are notoriously easy to mess up. An important part of the project is building correct and robust asynchronous components. We need to fully understand how the components work, and also figure out how to test them exhaustively.</p>
+<section id="metastability">
+<span id="brgtc6quickstart-metastability"></span><h3>Metastability<a class="headerlink" href="#metastability" title="Link to this heading"></a></h3>
+<p>Read Weste &amp; Harris VLSI textbook Ch. 10.6.1 if you are not familiar with metastability. (A copy of the PDF is (internal attachment))</p>
+</section>
+<section id="synchronizers">
+<span id="brgtc6quickstart-synchronizers"></span><h3>Synchronizers<a class="headerlink" href="#synchronizers" title="Link to this heading"></a></h3>
+<p>Our synchronizer impl is <a class="reference external" href="https://github.com/cornell-brg/brgtc6/blob/main/src/common/Synchronizer.sv">HERE</a>.</p>
+<p>Read Weste &amp; Harris VLSI textbook Ch. 10.6.2 and 10.6.3 if you are not familiar with synchronizers.</p>
+</section>
+<section id="asynchronous-fifo">
+<span id="brgtc6quickstart-asynchronousfifo"></span><h3>Asynchronous FIFO<a class="headerlink" href="#asynchronous-fifo" title="Link to this heading"></a></h3>
+<p>Our async fifo impl is <a class="reference external" href="https://github.com/cornell-brg/brgtc6/blob/main/src/asyncfifo/AsyncFifo.sv">HERE</a>.</p>
+<p>Read <a class="reference external" href="https://vlsiverify.com/verilog/verilog-codes/asynchronous-fifo/">Asynchronous FIFO - VLSI Verify</a>, and check out <a class="reference external" href="https://github.com/bespoke-silicon-group/basejump_stl/blob/master/bsg_async/bsg_async_fifo.sv">BSG Async FIFO Impl.</a></p>
+<p>If you don’t know gray code, read this two pager on gray codes <a class="reference external" href="https://www.encoder.com/hubfs/white-papers/WP-2010_Gray-Codes/wp2010-gray-codes-natural-binary-codes-and-conversions.pdf?hsLang=en#:~:text=Gray%20Code%20is%20a%20form%20of%20binary%20that%20uses%20a,the%20data%20must%20be%20incorrect).">HERE</a>.</p>
+</section>
+<section id="pseudo-random-bit-stream-prbs-generator-linear-feedback-shift-register-lfsr">
+<span id="brgtc6quickstart-pseudo-randombitstream-prbs-generator-linearfeedbackshiftregister-lfsr"></span><h3>Pseudo-Random Bit Stream (PRBS) Generator / Linear Feedback Shift Register (LFSR)<a class="headerlink" href="#pseudo-random-bit-stream-prbs-generator-linear-feedback-shift-register-lfsr" title="Link to this heading"></a></h3>
+<p>Read Weste &amp; Harris VLSI textbook Ch. 11.5.4 if you are not familiar with PRBS or LFSR.</p>
+</section>
+<section id="source-synchronous-interface">
+<span id="brgtc6quickstart-sourcesynchronousinterface"></span><h3>Source Synchronous Interface<a class="headerlink" href="#source-synchronous-interface" title="Link to this heading"></a></h3>
+<p>Read Intel’s guide on source synchronous interfaces <a class="reference external" href="https://cdrdv2-public.intel.com/653688/an433.pdf">HERE</a>. (It is for constraining FPGAs but very useful for understanding src-sync in general)</p>
+<blockquote>
+<div><p>Edit Sep. 7th:  In the interest of time, look at page 22 first on Center Aligned SDR output, that is closer to what we are doing.</p>
+</div></blockquote>
+</section>
+<section id="synopsis-design-constraints-sdc-files">
+<span id="brgtc6quickstart-synopsisdesignconstraints-sdc-files"></span><h3>Synopsis Design Constraints (SDC) Files<a class="headerlink" href="#synopsis-design-constraints-sdc-files" title="Link to this heading"></a></h3>
+<p>I am not an expert in them, the Intel handout on SDQ and TimeQuest for Quartus <a class="reference external" href="https://cdrdv2-public.intel.com/655074/mnl_sdctmq.pdf">HERE</a> is a good reference.</p>
+</section>
+</section>
+<section id="architecture">
+<span id="brgtc6quickstart-architecture"></span><h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
+<p>This section will talk about the architecture and how we came to the current solution.</p>
+<section id="architectural-development">
+<span id="brgtc6quickstart-architecturaldevelopment"></span><h3>Architectural Development<a class="headerlink" href="#architectural-development" title="Link to this heading"></a></h3>
+<section id="a-simple-src-synchronous-interface">
+<span id="brgtc6quickstart-asimplesrcsynchronousinterface"></span><h4>A Simple Src Synchronous Interface<a class="headerlink" href="#a-simple-src-synchronous-interface" title="Link to this heading"></a></h4>
+<p><a class="reference internal" href="../_images/image-2024-9-6_17-20-36.png"><img alt="image0" src="../_images/image-2024-9-6_17-20-36.png" style="width: 400px; height: 115px;" /></a></p>
+<p>The most native way to send data from chip A to chip B with a different clk is to send a clock along with the data. Chip B can sample the data with the provided clock, and then use the async fifo to cross the signal between time domains and synchronize it with chip B’s native clock.</p>
+<p>Note that the clk that is generated by ClkGen, (we will refer to as A’) would be much slower than the chip A clock because the interconnect cannot run as fast as the chips do.</p>
+<p>This interface, however, cannot handle back pressure, if chip B’s fifo fills, then any more message sent by A would fail.</p>
+</section>
+<section id="the-reset-problem">
+<span id="brgtc6quickstart-theresetproblem"></span><h4>The Reset Problem<a class="headerlink" href="#the-reset-problem" title="Link to this heading"></a></h4>
+<p>An Async FIFO has 2 clks and resets, one for the istream, which is in sync with A’, and another for the ostream, which is in sync with chip B’s clock. But we can’t connect the reset for chipB to the istream, because it is not synchronized with A’.</p>
+<p>We also cannot simply connect the chip A reset to the chip B istream, because A reset would also reset the clkGen, which provides A’. In the waveform below, you can see that A reset would not have been captured by A’, as A’ didn’t tick when A reset was high.</p>
+<p><a class="reference internal" href="../_images/image-2024-9-6_17-39-55.png"><img alt="image1" src="../_images/image-2024-9-6_17-39-55.png" style="width: 468px; height: 43px;" /></a></p>
+</section>
+<section id="credit-based-flow-control-interface">
+<span id="brgtc6quickstart-credit-basedflowcontrolinterface"></span><h4>Credit-Based Flow Control Interface<a class="headerlink" href="#credit-based-flow-control-interface" title="Link to this heading"></a></h4>
+<p><a class="reference internal" href="../_images/image-2024-9-6_17-27-37.png"><img alt="image2" src="../_images/image-2024-9-6_17-27-37.png" style="width: 468px; height: 168px;" /></a></p>
+<p>To support back pressure and fix the reset problem, we have the credit-based flow control interface.</p>
+<p>The idea of credit-based flow control is that the sending chip (chip A) would know ahead of time that the receiving chip (chip B) has a receiving buffer of size N. Then A will have N credits that it can expend to send messages to B (A can send A messages).</p>
+<p>After those credits are exhausted, A is forbidden from sending more messages to B. Whenever B pulls out a message from that buffer, it will issue a token back to A, which allows A to send another message.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>To solve the reset problem, we added a separate reset that is also generated by clkGen (the clkGen module is now embedded within the CreditSend module), so that the reset would act as a “start” signal and would only be pulled high after the generated clock started ticking.</p>
+<p>These two modules now basically become an adapter from val/rdy to credit-based flow and from credit-based flow to val/rdy.</p>
+</section>
+<section id="crc-repair">
+<span id="brgtc6quickstart-crc-repair"></span><h4>CRC &amp; Repair<a class="headerlink" href="#crc-repair" title="Link to this heading"></a></h4>
+<p><a class="reference internal" href="../_images/image-2024-9-6_18-52-25.png"><img alt="image3" src="../_images/image-2024-9-6_18-52-25.png" style="width: 468px; height: 80px;" /></a></p>
+<p>Now we add repairability to our interface. The CRC module will take all the msg and val signals and generate a parity bit (basically XORing them), such that if any bit is corrupted, it could be restored (by XORing all other bits).</p>
+<p>Another issue that might occur is a dead pin or wire, to fix that, we have a repair unit, that can offset wires around the broken wire.</p>
+</section>
+<section id="pattern-gen-check-bist">
+<span id="brgtc6quickstart-patterngen-check-bist"></span><h4>Pattern Gen &amp; Check (BIST)<a class="headerlink" href="#pattern-gen-check-bist" title="Link to this heading"></a></h4>
+<p>Another issue is validating the link. To do that we can add a BIST, a PRBS that generates data to send, and another PRBS to check the correctness. These PRBSs can be implemented simply as an LFSR, which loops over all possible combinations in a fixed rotation.</p>
+<p><a class="reference internal" href="../_images/image-2024-9-6_19-0-13.png"><img alt="image4" src="../_images/image-2024-9-6_19-0-13.png" style="width: 468px; height: 70px;" /></a></p>
+</section>
+</section>
+<section id="current-architecture-v1">
+<span id="brgtc6quickstart-currentarchitecture-v1"></span><h3>Current Architecture (V1)<a class="headerlink" href="#current-architecture-v1" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../_images/Arch_V1_Redraw.png"><img alt="image5" src="../_images/Arch_V1_Redraw.png" style="width: 468px; height: 118px;" /></a></p>
+<p>This diagram is the current architecture. We duplicated a reversed pipeline so that the link is bidirectional. We also added a loopback unit, which allows more comprehensive testing through the link.</p>
+<section id="configuration-interface">
+<span id="brgtc6quickstart-configurationinterface"></span><h4>Configuration Interface<a class="headerlink" href="#configuration-interface" title="Link to this heading"></a></h4>
+<p>There are many things that we need to configure in the chip at run time.</p>
+<ul class="simple">
+<li><p>The clock divider factor in the clkGen inside CreditSend</p></li>
+<li><p>Whether to enable the Patten Gen and Check BISTs or put them in bypass mode</p></li>
+<li><p>Whether to enable loopback</p></li>
+<li><p>The repair unit settings</p></li>
+<li><p>…</p></li>
+</ul>
+<p>There are also many things that we need to retrieve from the chip</p>
+<ul class="simple">
+<li><p>Number of CRC errors</p></li>
+<li><p>Credit deadlock</p></li>
+<li><p>BIST status</p></li>
+<li><p>…</p></li>
+</ul>
+<p>The chip implements an SPI minion and a configuration interface that supports both. Configuration writes set link settings (clock division factor, BIST mode, skew adjustments, etc.) before the link is enabled, and configuration reads poll for status registers (link status, error counters, received messages, etc.). The full configuration interface is documented in <a class="reference internal" href="../rtl_design/config_interface/"><span class="doc">BRGTC6 Config Interface</span></a>. For BRGTC6 the SPI minion is driven by an RP2040 MCU on the tester board.</p>
+</section>
+</section>
+</section>
+<section id="codebase">
+<span id="brgtc6quickstart-codebase"></span><h2>Codebase<a class="headerlink" href="#codebase" title="Link to this heading"></a></h2>
+<p>The GitHub repo for the project is <a class="reference external" href="https://github.com/cornell-brg/brgtc6">HERE</a>. RTL components are organized under <a class="reference external" href="https://github.com/cornell-brg/brgtc6/tree/main/src">src/</a> by function (<code class="docutils literal notranslate"><span class="pre">asyncfifo</span></code>, <code class="docutils literal notranslate"><span class="pre">common</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">crc</span></code>, <code class="docutils literal notranslate"><span class="pre">credit</span></code>, <code class="docutils literal notranslate"><span class="pre">pattern</span></code>, <code class="docutils literal notranslate"><span class="pre">repair</span></code>, <code class="docutils literal notranslate"><span class="pre">spi</span></code>, <code class="docutils literal notranslate"><span class="pre">top-full</span></code>). The <code class="docutils literal notranslate"><span class="pre">fpga/</span></code> folder contains the Quartus projects used to prototype the upstream and downstream links on the BRG ECE2300 FPGA boards.</p>
+<section id="testing">
+<span id="brgtc6quickstart-testing"></span><h3>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h3>
+<p>Unit and integration tests live in <code class="docutils literal notranslate"><span class="pre">test/</span></code> and are driven by a CMake build. RTL simulation is run with Verilator (2-state) and Synopsys VCS (4-state); each component under <code class="docutils literal notranslate"><span class="pre">src/</span></code> has a corresponding unit test in <code class="docutils literal notranslate"><span class="pre">test/unit/</span></code>, and the link-level integration tests in <code class="docutils literal notranslate"><span class="pre">test/integration/</span></code> exercise the SingleLink and DualLink configurations for V1 through V4. The testbench uses SystemVerilog rather than PyMTL so that asynchronous components can be exercised with multiple clock domains.</p>
+<p>The taped-out design was also exercised on the BRG ECE2300 FPGA boards under Quartus prior to tapeout; the FPGA projects live in <code class="docutils literal notranslate"><span class="pre">fpga/upstream_fpga</span></code> and <code class="docutils literal notranslate"><span class="pre">fpga/downstream_fpga</span></code>.</p>
+</section>
+</section>
+<section id="pdk-flow">
+<span id="brgtc6quickstart-pdk-flow"></span><h2>PDK &amp; Flow<a class="headerlink" href="#pdk-flow" title="Link to this heading"></a></h2>
+<p>The TSMC 65nm GP PDK is installed on the BRG server. The ASIC physical-design flow (synthesis, PnR, DRC, LVS) is maintained out-of-tree and consumes the RTL from this repo via a git submodule.</p>
+</section>
+<section id="design-methodology">
+<span id="brgtc6quickstart-designmethodology"></span><h2>Design Methodology<a class="headerlink" href="#design-methodology" title="Link to this heading"></a></h2>
+<p>This is a rough outline of the key steps that were followed to reach tapeout.</p>
+<p><a class="reference internal" href="../_images/Untitled_drawing_(1).png"><img alt="image6" src="../_images/Untitled_drawing_%281%29.png" style="width: 468px; height: 267px;" /></a></p>
+</section>
+<section id="resources">
+<span id="brgtc6quickstart-resources"></span><h2>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>BRGTC6 Project Report | <a class="reference external" href="https://www.csl.cornell.edu/~cbatten/pdfs/lyu-brgtc6-cureport2025.pdf">BRGTC6: Source-Synchronous Parallel Chip-to-Chip Link</a></p></li>
+<li><p>West &amp; Harris VLSI Textbook | <a class="reference external" href="/download/attachments/533203303/CMOS%20VLSI%20Design%20A%20Circuits%20and%20Systems%20Perspective%2C%204th%20Edition%20%282011%29.pdf?version=1&amp;modificationDate=1725654344106&amp;api=v2">CMOS VLSI Design A Circuits and Systems Perspective, 4th Edition (2011).pdf</a></p></li>
+<li><p>VLSIVerify | <a class="reference external" href="https://vlsiverify.com/">https://vlsiverify.com/</a></p></li>
+<li><p>Bespoke Silicon Group | <a class="reference external" href="https://github.com/bespoke-silicon-group/basejump_stl/blob/master/bsg_async/bsg_async_fifo.sv">github.com/bespoke-silicon-group/</a></p></li>
+<li><p>Graycode White Paper | <a class="reference external" href="https://www.encoder.com/hubfs/white-papers/WP-2010_Gray-Codes/wp2010-gray-codes-natural-binary-codes-and-conversions.pdf">PDF Link</a></p></li>
+<li><p>Intel/Altera Guide On Constraining and Analyzing Source-Synchronous Interface | <a class="reference external" href="https://cdrdv2-public.intel.com/653688/an433.pdf">https://cdrdv2-public.intel.com/653688/an433.pdf</a></p></li>
+<li><p>Intel Guide On SDC and TimeQuest | <a class="reference external" href="https://cdrdv2-public.intel.com/655074/mnl_sdctmq.pdf">https://cdrdv2-public.intel.com/655074/mnl_sdctmq.pdf</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../" class="btn btn-neutral float-left" title="BRGTC6 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../rtl_design/rtl_design/" class="btn btn-neutral float-right" title="RTL Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Barry Lyu, Parker Schless, Vayun Tiwari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

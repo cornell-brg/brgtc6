@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Verification &mdash; BRGTC6  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/logo.css?v=0320fe47" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/table.css?v=09be579f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/image.css?v=c42c1b78" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Integration Tests" href="../integration_tests/" />
+    <link rel="prev" title="BRGTC6 Config Interface" href="../../rtl_design/config_interface/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            BRGTC6
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Background Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/">Background Information</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTL Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/rtl_design/">RTL Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/design_overview/">BRGTC6 RTL Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/config_interface/">BRGTC6 Config Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Design Verification</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design Verification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#test-cases">Test Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-directory-structure">Test Directory Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build">build/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration">integration/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unit">unit/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utils">utils/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmakelists-txt">CMakeLists.txt</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration_tests/">Integration Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_environment/">Test Environment/Infrastructure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Post-Silicon Validation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../post_silicon/daughter_boards/">Daughter Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../post_silicon/tester_board/">Tester Board</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">BRGTC6</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Design Verification</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cornell-brg/brgtc6/blob/main/docs/verification/verification.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="design-verification">
+<h1>Design Verification<a class="headerlink" href="#design-verification" title="Link to this heading"></a></h1>
+<section id="test-cases">
+<span id="designverification-testcases"></span><h2>Test Cases<a class="headerlink" href="#test-cases" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>For integration tests, see <a class="reference internal" href="../integration_tests/"><span class="doc">Integration Tests</span></a></p></li>
+<li><p>For unit tests, see the testbench sources under <code class="docutils literal notranslate"><span class="pre">test/unit/</span></code> in the repository</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="test-directory-structure">
+<span id="designverification-testdirectorystructure"></span><h2>Test Directory Structure<a class="headerlink" href="#test-directory-structure" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">brgtc6/test/</div>
+<div class="line">├─ build/</div>
+<div class="line">├─ integration/</div>
+<div class="line">├─ unit/</div>
+<div class="line">├─ utils/</div>
+<div class="line">├─ CMakeLists.txt</div>
+</div>
+<section id="build">
+<span id="designverification-build"></span><h3>build/<a class="headerlink" href="#build" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Contains all build outputs with the same directory structure below including integration, unit, and utils sub-directories</p></li>
+<li><p>Must be manually created by the user with <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">build</span></code> while in the <code class="docutils literal notranslate"><span class="pre">brgtc6/test</span></code> directory</p></li>
+</ul>
+</section>
+<section id="integration">
+<span id="designverification-integration"></span><h3>integration/<a class="headerlink" href="#integration" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Contains all Link-level integration tests for each version including single and double-link variants</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration/DualLinkV3-test.sv</span></code> - Tests two V3 links communicating with each other</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration/DualLinkV4-test.sv</span></code> - Tests two V4 links communicating with each other</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration/DualLinkV4Backpressure-test.sv</span></code> - Tests backpressure handling on main channel and config interfaces for two V4 links when in both one-way and two-way operation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration/SingleLinkV1-test.sv</span></code> - Tests one V1 link communicating to itself (upstream is looped-back to downstream on the same link)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration/SingleLinkV2-test.sv</span></code> - Tests one V2 link communicating to itself (upstream is looped-back to downstream on the same link)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration/SingleLinkV3-test.sv</span></code> - Tests one V3 link communicating to itself (upstream is looped-back to downstream on the same link)</p></li>
+</ul>
+</section>
+<section id="unit">
+<span id="designverification-unit"></span><h3>unit/<a class="headerlink" href="#unit" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Contains all unit tests for all modules</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unit/&lt;sub-dir&gt;/&lt;module&gt;-test.sv</span></code> - Tests specific characteristics of the module (in the given sub-directory) under test to achieve maximum coverage</p></li>
+</ul>
+</section>
+<section id="utils">
+<span id="designverification-utils"></span><h3>utils/<a class="headerlink" href="#utils" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Contains test utilities used by many testbenches in integration and unit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/auto_src_sink/SrcSinkDualClkTB.sv</span></code> - Provides automated src/sink handling so rdy/val interfaces do not need to be controlled manually, specifically for dual clock setups</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/auto_src_sink/SrcSinkSingleClkTB.sv</span></code> - Provides automated src/sink handling so rdy/val interfaces do not need to be controlled manually, specifically for single clock setups</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/auto_src_sink/TestSink.sv</span></code> - Automated sink module for use with the automated src/sink TB modules</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/auto_src_sink/TestSouce.sv</span></code> - Automated source module for use with the automated src/sink TB modules</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/auto_src_sink/TwoWaySrcSinkDualClkTB.sv</span></code> - Provides automated src/sink handling with two sources and two sinks (each src/sink pair has its own clock) for use with DualLink tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/clock/DualClkUtils.sv</span></code> - Clock generation and reset control for dual clock testbenches, able to delay/disable each reset and handle timeout</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/clock/SingleClockUtils.sv</span></code> - Clock generation and reset control for single clock cases, able to delay reset and handle timeout</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/cred_skewer/CredSkewer.sv</span></code> - Creates skew on individual bits of a given credit interface to test deskewing capabilities of the link, used in V3 integration tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/cred_skewer/CredSkewerErrorerV4.sv</span></code> - Creates skew and introduces error on individual bits of a given credit interface of a V4 link to test deskewing and CRC detection capabilities of the V4 link, used in V4 integration tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/cred_skewer/SkewShreg.sv</span></code> - A shift register whose output is from the selected stage which allows for generating a configurable, artificial skew of a single bit, used in the CredSkewer’s for skew generation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/manual/ManualCheckDualClkTB.sv</span></code> - Provides test case framework for test benches where rdy/val interfaces are controlled manually, specifically for dual clock setups</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/manual/ManualCheckSingleClkTB.sv</span></code> - Provides test case framework for test benches where rdy/val interfaces are controlled manually, specifically for single clock setups</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/spi/SpiDriver.sv</span></code> - Acts as the controller equivalent to the BRG SPI minion’s peripheral behavior, generates the SCLK signal and sends/receives data in a full-duplex manner on SPI mode 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/spi/SpiDriverValRdy.sv</span></code> - Controller-side equivalent to the BRG SPI minion adapter, wrapper around the SpiDriver to handle the extra val/rdy bits within the SPI transaction for the DUT, can interface with any standard val/rdy interface to essentially “mask” the fact that an SPI connection is underneath</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/spi/SyncFifoNextFull.sv</span></code> - Synchronous FIFO used by the SpiDriverValRdy with an output signal that asserts if the next valid write to it will cause it to be full</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/timing_checks/DualLinkV4-test-no-sync-xprop.ucli.sv</span></code> - UCLI script for Synopsys DC that disables X-propagation on DualLinkV4 integration tests’ synchronizer inputs since simulation cannot model metastability correctly and will always cause false X-propagation if timing violations fail, the timing violation messages are still displayed for debugging purposes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/vc/*</span></code> - Provides common modules including registers, assertions, and line-tracing utilities for use by other modules</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_system_time_seed.cpp</span></code> - Simple C++ program to output the system clock for use with random seed generation by the testbenches, linked into Verilator and VCS through the DPI interface</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.cpp</span></code> - Verilator C++ main simulation program</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils/TestUtilsDefs.sv</span></code> - Provides common DEFINE’s used across the testing environment</p></li>
+</ul>
+</section>
+<section id="cmakelists-txt">
+<span id="designverification-cmakelists-txt"></span><h3>CMakeLists.txt<a class="headerlink" href="#cmakelists-txt" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Main CMake generation file for all verification</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../rtl_design/config_interface/" class="btn btn-neutral float-left" title="BRGTC6 Config Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../integration_tests/" class="btn btn-neutral float-right" title="Integration Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Barry Lyu, Parker Schless, Vayun Tiwari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

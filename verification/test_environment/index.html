@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Environment/Infrastructure &mdash; BRGTC6  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/logo.css?v=0320fe47" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/table.css?v=09be579f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/image.css?v=c42c1b78" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=187304be"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="Daughter Boards" href="../../post_silicon/daughter_boards/" />
+    <link rel="prev" title="Integration Tests" href="../integration_tests/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../" class="icon icon-home">
+            BRGTC6
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Background Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/">Background Information</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTL Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/rtl_design/">RTL Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/design_overview/">BRGTC6 RTL Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rtl_design/config_interface/">BRGTC6 Config Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Design Verification</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../verification/">Design Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration_tests/">Integration Tests</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Test Environment/Infrastructure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#testbench-structure">Testbench Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unit-tests-single-clock">Unit Tests - Single Clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unit-tests-dual-clocks">Unit Tests - Dual Clocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-tests-single-link">Integration Tests - Single Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-tests-dual-links">Integration Tests - Dual Links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-modes-and-running-tests">Testing Modes and Running Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#verilator-rtl">Verilator RTL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verilator-coverage">Verilator Coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vcs-rtl">VCS RTL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vcs-fast-functional-gate-level-ffgl">VCS Fast-Functional Gate-Level (FFGL)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vcs-back-annotated-ba">VCS Back-Annotated (BA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-flags-for-executables">Additional Flags for Executables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cmakelists-file">CMakeLists File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmakelists-txt-file-structure">CMakeLists.txt File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-tests">Adding Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parameterization">Parameterization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controlled-randomization">Controlled Randomization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github-actions">GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#useful-resources">Useful Resources</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Post-Silicon Validation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../post_silicon/daughter_boards/">Daughter Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../post_silicon/tester_board/">Tester Board</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">BRGTC6</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Test Environment/Infrastructure</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cornell-brg/brgtc6/blob/main/docs/verification/test_environment.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-environment-infrastructure">
+<h1>Test Environment/Infrastructure<a class="headerlink" href="#test-environment-infrastructure" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#testbench-structure" id="id1">Testbench Structure</a></p>
+<ul>
+<li><p><a class="reference internal" href="#unit-tests-single-clock" id="id2">Unit Tests - Single Clock</a></p></li>
+<li><p><a class="reference internal" href="#unit-tests-dual-clocks" id="id3">Unit Tests - Dual Clocks</a></p></li>
+<li><p><a class="reference internal" href="#integration-tests-single-link" id="id4">Integration Tests - Single Link</a></p></li>
+<li><p><a class="reference internal" href="#integration-tests-dual-links" id="id5">Integration Tests - Dual Links</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#testing-modes-and-running-tests" id="id6">Testing Modes and Running Tests</a></p>
+<ul>
+<li><p><a class="reference internal" href="#verilator-rtl" id="id7">Verilator RTL</a></p></li>
+<li><p><a class="reference internal" href="#verilator-coverage" id="id8">Verilator Coverage</a></p></li>
+<li><p><a class="reference internal" href="#vcs-rtl" id="id9">VCS RTL</a></p></li>
+<li><p><a class="reference internal" href="#vcs-fast-functional-gate-level-ffgl" id="id10">VCS Fast-Functional Gate-Level (FFGL)</a></p></li>
+<li><p><a class="reference internal" href="#vcs-back-annotated-ba" id="id11">VCS Back-Annotated (BA)</a></p></li>
+<li><p><a class="reference internal" href="#additional-flags-for-executables" id="id12">Additional Flags for Executables</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cmakelists-file" id="id13">CMakeLists File</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cmakelists-txt-file-structure" id="id14">CMakeLists.txt File Structure</a></p></li>
+<li><p><a class="reference internal" href="#adding-tests" id="id15">Adding Tests</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#parameterization" id="id16">Parameterization</a></p></li>
+<li><p><a class="reference internal" href="#controlled-randomization" id="id17">Controlled Randomization</a></p></li>
+<li><p><a class="reference internal" href="#github-actions" id="id18">GitHub Actions</a></p></li>
+<li><p><a class="reference internal" href="#useful-resources" id="id19">Useful Resources</a></p></li>
+</ul>
+</nav>
+<section id="testbench-structure">
+<span id="testenvironment-infrastructure-testbenchstructure"></span><h2><a class="toc-backref" href="#id1" role="doc-backlink">Testbench Structure</a><a class="headerlink" href="#testbench-structure" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Each <code class="docutils literal notranslate"><span class="pre">-test</span></code>  file starts with a top-level module <code class="docutils literal notranslate"><span class="pre">Top</span></code> which contains a generate statement for each of the parameterized tests along with pass/fail logic to ensure the testbench only ends when each parameterized test finishes</p></li>
+<li><p>Each parameterized test module contains its own instance of the testbench used, a DUT instance, a main <code class="docutils literal notranslate"><span class="pre">run()</span></code> task which executes each of the test cases tasks in series and updates the testbench with the pass/fail status</p></li>
+<li><p>The specific testbench module used can vary between automated val/rdy handling as well as the number of clocks needed for the DUT (one or two), it contains functions for starting and ending the testbench, starting and ending individual test cases, recording of the pass/fail results, as well as utilities to dump VCD files when the appropriate plusargs are provided</p></li>
+<li><p>Within each testbench is a clock utility module that again has two variations depending on the number of clocks used, it is able to generate clock signals, generate reset signals with provided delays, reliably change the clock period on-the-fly, as well as handle testbench timeouts</p></li>
+</ul>
+<section id="unit-tests-single-clock">
+<span id="testenvironment-infrastructure-unittests-singleclock"></span><h3><a class="toc-backref" href="#id2" role="doc-backlink">Unit Tests - Single Clock</a><a class="headerlink" href="#unit-tests-single-clock" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Val/Rdy signals are controlled manually by the individual test case as part of the inputs and outputs in the diagram, checking must be manually done through a function call to the testbench</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/SingleClockUnitTest.png"><img alt="image0" src="../../_images/SingleClockUnitTest.png" style="width: 468px; height: 208px;" /></a></p>
+</section>
+<section id="unit-tests-dual-clocks">
+<span id="testenvironment-infrastructure-unittests-dualclocks"></span><h3><a class="toc-backref" href="#id3" role="doc-backlink">Unit Tests - Dual Clocks</a><a class="headerlink" href="#unit-tests-dual-clocks" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Val/Rdy signals are controlled manually by the individual test case as part of the inputs and outputs in the diagram, checking must be manually done through a function call to the testbench</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/DualClockUnitTest.png"><img alt="image1" src="../../_images/DualClockUnitTest.png" style="width: 468px; height: 208px;" /></a></p>
+</section>
+<section id="integration-tests-single-link">
+<span id="testenvironment-infrastructure-integrationtests-singlelink"></span><h3><a class="toc-backref" href="#id4" role="doc-backlink">Integration Tests - Single Link</a><a class="headerlink" href="#integration-tests-single-link" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Automated <code class="docutils literal notranslate"><span class="pre">TestSource</span></code> and <code class="docutils literal notranslate"><span class="pre">TestSink</span></code> modules handle the Val/Rdy interfaces, while the test cases only set knobs in the testbench as well as in the testing elements such as artificial skew and error injectors, checking is done automatically by the sources and sinks</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/SingleLinkIntegrationTest.png"><img alt="image2" src="../../_images/SingleLinkIntegrationTest.png" style="width: 468px; height: 537px;" /></a></p>
+</section>
+<section id="integration-tests-dual-links">
+<span id="testenvironment-infrastructure-integrationtests-duallinks"></span><h3><a class="toc-backref" href="#id5" role="doc-backlink">Integration Tests - Dual Links</a><a class="headerlink" href="#integration-tests-dual-links" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Automated <code class="docutils literal notranslate"><span class="pre">TestSource</span></code> and <code class="docutils literal notranslate"><span class="pre">TestSink</span></code> modules handle the Val/Rdy interfaces, while the test cases only set knobs in the testbench as well as in the testing elements such as artificial skew and error injectors, each link has its own clock and pair of source and sink while communicating through two credit interfaces for full-duplex communication, checking is done automatically by the sources and sinks</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/DualLinkIntegrationTest.png"><img alt="image3" src="../../_images/DualLinkIntegrationTest.png" style="width: 468px; height: 866px;" /></a></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="testing-modes-and-running-tests">
+<span id="testenvironment-infrastructure-testingmodesandrunningtests"></span><h2><a class="toc-backref" href="#id6" role="doc-backlink">Testing Modes and Running Tests</a><a class="headerlink" href="#testing-modes-and-running-tests" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Verilator and VCS are supported by this verification infrastructure. Verilator is used for basic 2-state simulation, coverage generation, and GitHub Actions regression testing, while VCS is used for more advanced 4-state simulation, FFGL, and BA testing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build/</span></code> must be created manually with <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">build</span></code> while in the <code class="docutils literal notranslate"><span class="pre">test/</span></code> directory</p></li>
+<li><p>Run outputs will show each test case for each testbench, as well as green dots or red F’s to indicate success or failure respectively for each check within each test case (or in the case of using +verbose, extra details about each check such as a custom message, the simulation time at which the check occurs, as well as the expected and actual values are displayed)</p></li>
+</ul>
+<section id="verilator-rtl">
+<span id="testenvironment-infrastructure-verilatorrtl"></span><h3><a class="toc-backref" href="#id7" role="doc-backlink">Verilator RTL</a><a class="headerlink" href="#verilator-rtl" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Simulates (2-state) the source RTL Verilog using Verilator</p></li>
+<li><p>Build the test using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;module&gt;-test-verilator</span></code> in the <code class="docutils literal notranslate"><span class="pre">test/build/</span></code> directory</p></li>
+<li><p>The executables for these tests will be of the form <code class="docutils literal notranslate"><span class="pre">./&lt;directories&gt;/&lt;module&gt;-test/&lt;module&gt;-test-verilator-out/&lt;module&gt;-test-verilator-exec</span></code></p></li>
+<li><p>Running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> in the <code class="docutils literal notranslate"><span class="pre">test/build</span></code> directory will build and run all Verilator RTL tests including unit and integration tests</p></li>
+</ul>
+</section>
+<section id="verilator-coverage">
+<span id="testenvironment-infrastructure-verilatorcoverage"></span><h3><a class="toc-backref" href="#id8" role="doc-backlink">Verilator Coverage</a><a class="headerlink" href="#verilator-coverage" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Generates coverage data in the <code class="docutils literal notranslate"><span class="pre">test/build/coverage</span></code> subdirectory with the same file hierarchy as the source code</p></li>
+<li><p>Each submodule of the DUT will have its own file within its subdirectory containing numbers on the left-most column, the descriptions of these numbers are as follows</p>
+<ul>
+<li><p>Next to <code class="docutils literal notranslate"><span class="pre">logic</span></code> declarations (toggle coverage) - show the total number of times the signal as toggled between 0 and 1 (for multi-bit signals, this means the number of times ALL the bits have switched)</p></li>
+<li><p>Next to control logic, assignment statements, etc. (line coverage) - show the total number of times the specific line has been “utilized” in hardware</p></li>
+<li><p>Next to cover properties (functional coverage) - shows the number of times the property has been true</p>
+<ul>
+<li><p>See <code class="docutils literal notranslate"><span class="pre">AsyncFifo-test</span></code> for an example of how cover properties are created in the testbench as well as <a class="reference external" href="https://www.doulos.com/knowhow/systemverilog/systemverilog-tutorials/systemverilog-assertions-tutorial/">this article</a> on how cover properties (and the underlying assertions) work in SystemVerilog (Verilator only supports functional coverage through cover properties as of right now, but also in a very limited scope as many expressions such as temporal sequences <code class="docutils literal notranslate"><span class="pre">##</span></code> are not supported)</p></li>
+<li><p>Note that in Verilator coverage, the total number of attempts to evaluate the cover property is not shown (the total number of times the property is true is instead shown), and so cover properties should only be used to indicate if that property has been hit at least once. If the reason for testing this property is to ensure that it is true every time it is evaluated, then a standard test bench check should be used instead</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Once the coverage target is run, the % coverage will be displayed in the terminal</p></li>
+<li><p>To change the threshold for the number of toggles/line activations/etc. that Verilator uses to report good coverage, change the number next to  <code class="docutils literal notranslate"><span class="pre">--annotate-min</span></code> in the CMakeLists.txt file for generating the coverage target</p></li>
+<li><p>Build and generate the coverage reports with the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;module&gt;-coverage</span></code> in the <code class="docutils literal notranslate"><span class="pre">build/</span></code> directory</p></li>
+<li><p>Running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">coverage</span></code> in the <code class="docutils literal notranslate"><span class="pre">test/build</span></code> directory will run all coverage targets</p></li>
+</ul>
+</section>
+<section id="vcs-rtl">
+<span id="testenvironment-infrastructure-vcsrtl"></span><h3><a class="toc-backref" href="#id9" role="doc-backlink">VCS RTL</a><a class="headerlink" href="#vcs-rtl" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Simulates (4-state) the source RTL Verilog using Synopsys VCS</p></li>
+<li><p>Build the test using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;module&gt;-test-vcs-rtl</span></code> in the <code class="docutils literal notranslate"><span class="pre">test/build/</span></code> directory</p></li>
+<li><p>The executables for these tests will be of the form <code class="docutils literal notranslate"><span class="pre">./&lt;directories&gt;/&lt;module&gt;-test/&lt;module&gt;-test-vcs-rtl-out/&lt;module&gt;-test-vcs-rtl-exec</span></code></p></li>
+</ul>
+</section>
+<section id="vcs-fast-functional-gate-level-ffgl">
+<span id="testenvironment-infrastructure-vcsfast-functionalgate-level-ffgl"></span><h3><a class="toc-backref" href="#id10" role="doc-backlink">VCS Fast-Functional Gate-Level (FFGL)</a><a class="headerlink" href="#vcs-fast-functional-gate-level-ffgl" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Performs a fast-functional gate-level simulation (no simulated delays included) of the synthesized netlist using VCS with the same testbenches as the standard RTL tests</p></li>
+<li><p>These tests REQUIRE the synthesis step of the ASIC flow for this project to be completed such that the <code class="docutils literal notranslate"><span class="pre">BRGTC6_post-synth.v</span></code> file is produced in the <code class="docutils literal notranslate"><span class="pre">asic/build/</span></code> directory, as well as the path to the standard view for the TSMC 65nm GP PDK to be available to the user so that the standard cell and IO cell Verilog source files are available</p></li>
+<li><p>Build the test using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;module&gt;-test-vcs-ffgl</span></code> in the <code class="docutils literal notranslate"><span class="pre">test/build/</span></code> directory</p></li>
+<li><p>The executables for these tests will be of the form <code class="docutils literal notranslate"><span class="pre">./&lt;directories&gt;/&lt;module&gt;-test/&lt;module&gt;-test-vcs-ffgl-out/&lt;module&gt;-test-vcs-ffgl-exec</span></code></p></li>
+<li><p>Only the DualLink tests support this mode</p></li>
+</ul>
+</section>
+<section id="vcs-back-annotated-ba">
+<span id="testenvironment-infrastructure-vcsback-annotated-ba"></span><h3><a class="toc-backref" href="#id11" role="doc-backlink">VCS Back-Annotated (BA)</a><a class="headerlink" href="#vcs-back-annotated-ba" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Performs a back-annotated gate-level simulation (includes delays calculated during PnR) of the post-PnR netlist using VCS with the same testbenches as the standard RTL tests</p></li>
+<li><p>These tests REQUIRE every step of the ASIC flow through PnR to be completed such that the <code class="docutils literal notranslate"><span class="pre">post-pnr.vcs.v</span></code> file is produced in the <code class="docutils literal notranslate"><span class="pre">asic/build/</span></code> directory, the sdf files produced by the PnR step in <code class="docutils literal notranslate"><span class="pre">asic/build/</span></code> directory, as well as the same standard view in FFGL testing for the standard cell and IO cell Verilog source files</p></li>
+<li><p>Build the test using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;module&gt;-test-vcs-ba</span></code> in the <code class="docutils literal notranslate"><span class="pre">test/build/</span></code> directory</p></li>
+<li><p>The executables for these tests will be of the form <code class="docutils literal notranslate"><span class="pre">./&lt;directories&gt;/&lt;module&gt;-test/&lt;module&gt;-test-vcs-ba-out/&lt;module&gt;-test-vcs-ba-exec</span></code></p></li>
+<li><p>Only the DualLink tests support this mode</p></li>
+<li><p>Verilator nor VCS can accurately simulate metastability resolution as would happen on silicon, and so X’s will be falsely propagated and the test will fail. To prevent this, use the <code class="docutils literal notranslate"><span class="pre">-ucli</span> <span class="pre">-i</span> <span class="pre">../utils/timing_checks/DualLinkV4-test-no-sync-xprop.ucli</span></code>  option when executing any of the V4 integration tests so that X-propagation is disabled for the synchronizer inputs. Note that the timing violations will still be displayed so that the user is aware of what is actually occurring in the test, but X’s will not be propagated by the first stage flop in the relevant synchronizers</p></li>
+</ul>
+</section>
+<section id="additional-flags-for-executables">
+<span id="testenvironment-infrastructure-additionalflagsforexecutables"></span><h3><a class="toc-backref" href="#id12" role="doc-backlink">Additional Flags for Executables</a><a class="headerlink" href="#additional-flags-for-executables" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">+dump-vcd=&lt;file-path&gt;.vcd</span></code> - dumps the variables to a .vcd file with the specified path</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+dump-saif=&lt;file-path&gt;.vcd</span></code> - ONLY AVAILABLE FOR FFGL OR BA TESTING OF DUALLINK TESTS, dumps the switching activity to a .saif file with the specified path for power analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+verbose</span></code> - prints more details in the console about the specific run</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+test-case=&lt;n&gt;</span></code> - only runs test case <code class="docutils literal notranslate"><span class="pre">n</span></code> as listed in the specified test</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="cmakelists-file">
+<span id="testenvironment-infrastructure-cmakelistsfile"></span><h2><a class="toc-backref" href="#id13" role="doc-backlink">CMakeLists File</a><a class="headerlink" href="#cmakelists-file" title="Link to this heading"></a></h2>
+<section id="cmakelists-txt-file-structure">
+<span id="testenvironment-infrastructure-cmakelists-txtfilestructure"></span><h3><a class="toc-backref" href="#id14" role="doc-backlink">CMakeLists.txt File Structure</a><a class="headerlink" href="#cmakelists-txt-file-structure" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>CMake is used for building and running all test cases and modes as described above</p></li>
+<li><p>Initial steps</p>
+<ul>
+<li><p>Prints the project name, authors, etc. to the console</p></li>
+<li><p>Sets directories to local variables for use by build targets</p></li>
+<li><p>Defines common flags to be used for all invocations of Verilator or VCS - these can be changed depending on the need of the user</p></li>
+</ul>
+</li>
+<li><p>Test target generation</p>
+<ul>
+<li><p>FFGL test target is generated with a function to call VCS with the appropriate arguments and file inputs</p></li>
+<li><p>BA test target is generated with a function to call VCS with the appropriate arguments and file inputs</p></li>
+<li><p>RTL/coverage test target is generated with a function to call both VCS and Verilator RTL tests with the appropriate arguments and file inputs, adds the Verilator RTL test to the ctest list, as well as creates a coverage target dependent on the Verilator RTL target</p></li>
+</ul>
+</li>
+<li><p>Test target generation - see Adding Tests below</p></li>
+</ul>
+</section>
+<section id="adding-tests">
+<span id="testenvironment-infrastructure-addingtests"></span><h3><a class="toc-backref" href="#id15" role="doc-backlink">Adding Tests</a><a class="headerlink" href="#adding-tests" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Create new file in associated subdirectory in <code class="docutils literal notranslate"><span class="pre">brgtc6/test</span></code> with the form of <code class="docutils literal notranslate"><span class="pre">&lt;test_name&gt;-test.sv</span></code> and follow same structure as other testbenches to hook up the module</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> follow the same structure as other tests listed to add the test at the bottom of the file, where an RTL/coverage test, FFGL test, or BA test is specified by calls to different target generation functions</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="parameterization">
+<span id="testenvironment-infrastructure-parameterization"></span><h2><a class="toc-backref" href="#id16" role="doc-backlink">Parameterization</a><a class="headerlink" href="#parameterization" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Testbench parameterization is handled in the <code class="docutils literal notranslate"><span class="pre">Top</span></code> module of each testbench by using a generate statement to create multiple, independent instances of the given testbench</p></li>
+<li><p>Each instance obtains its parameters via localparam arrays specified at the beginning of <code class="docutils literal notranslate"><span class="pre">Top</span></code></p></li>
+<li><p>Each testbench also has three inputs and outputs:</p>
+<ul>
+<li><p> <code class="docutils literal notranslate"><span class="pre">go</span></code> - tells the testbench when to start running its tests as specified in its <code class="docutils literal notranslate"><span class="pre">run()</span></code> task (see the bottom of the testbench for an example of how this <code class="docutils literal notranslate"><span class="pre">go</span></code> signal is detected in an always block</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass</span></code> - tells <code class="docutils literal notranslate"><span class="pre">Top</span></code> if the testbench has passed all of its tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">done</span></code> - tells <code class="docutils literal notranslate"><span class="pre">Top</span></code> if the testbench has finished executing all of its tests</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Top</span></code> will wait for all testbenches to assert their <code class="docutils literal notranslate"><span class="pre">done</span></code> signals, after which it will check to see if all testbenches have asserted their <code class="docutils literal notranslate"><span class="pre">pass</span></code> signals. If at least one of the testbenches has not asserted its <code class="docutils literal notranslate"><span class="pre">pass</span></code> signal, <code class="docutils literal notranslate"><span class="pre">Top</span></code> will print out a fail message to indicate the overall failed status, otherwise it will print out a success message to indicate the overall passed status</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="controlled-randomization">
+<span id="testenvironment-infrastructure-controlledrandomization"></span><h2><a class="toc-backref" href="#id17" role="doc-backlink">Controlled Randomization</a><a class="headerlink" href="#controlled-randomization" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Randomization is handled through “seeding the generator” within each call to a specific test case. Each test case task executes as follows where the seed can be passed into the task as an input or else is assigned a default value (note the call to <code class="docutils literal notranslate"><span class="pre">$urandom</span></code> after seeding the generator is still as a task - this is important since Verilator will not exhibit the proper behavior otherwise):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">integer</span> <span class="pre">dummy_rand</span> <span class="pre">=</span> <span class="pre">$urandom(seed);</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integer</span> <span class="pre">rand_num1</span> <span class="pre">=</span> <span class="pre">$urandom();</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integer</span> <span class="pre">rand_num2</span> <span class="pre">=</span> <span class="pre">$urandom();</span></code></p></li>
+<li><p>and so on…</p></li>
+</ul>
+</li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">run()</span></code> task of each testbench, a specific seed value can be passed in as an input to the individual test case, ensuring the same sequence of values for every call to <code class="docutils literal notranslate"><span class="pre">$urandom</span></code> is produced for that test case every time, such that the exact same outputs are achieved for every run</p></li>
+<li><p>If the seed is not provided, the test case seed is calculated as <code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">get_system_time_seed()</span> <span class="pre">+</span> <span class="pre">$time;</span></code> . The <code class="docutils literal notranslate"><span class="pre">get_system_time_seed()</span></code> function is called through the DPI interface from a simple C++ function provided in the <code class="docutils literal notranslate"><span class="pre">test/utils</span></code> folder to provide a unique number (at least at an interval of seconds) for each run of the testbench, while the extra <code class="docutils literal notranslate"><span class="pre">$time</span></code> term is added so that different test cases within the same testbench will have different seeds since the aforementioned C++ function will provide the same value to each test case for a particular run</p></li>
+<li><p>A duplicate test case that specifies the seed can easily be added to the <code class="docutils literal notranslate"><span class="pre">run()</span></code> function so that the same outputs and sequence of events can be tested on each run of the testbench in case a specific randomization triggers a corner case</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="github-actions">
+<span id="testenvironment-infrastructure-githubactions"></span><h2><a class="toc-backref" href="#id18" role="doc-backlink">GitHub Actions</a><a class="headerlink" href="#github-actions" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>This repository supports GitHub Actions with simulation by Verilator. The workflow configuration is located in <code class="docutils literal notranslate"><span class="pre">brgtc6/.github/workflows/default-regression.yml</span></code></p></li>
+<li><p>Here are the steps it takes to run the regression tests on one of GitHub’s remote machines:</p>
+<ul>
+<li><p>Checks out the repository</p></li>
+<li><p>Installs Verilator directly as a tarball from the Pymtl GitHub</p></li>
+<li><p>Verifies the Verilator version</p></li>
+<li><p>Installs CMake with apt-get</p></li>
+<li><p>Builds and runs all tests listed in the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file using the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> target</p></li>
+</ul>
+</li>
+<li><p>Results can be seen on the repository home page with a green check indicating success or a red X indicating failure next to the latest commit pushed - note that these tests start and run automatically when any commit is pushed to remote</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="useful-resources">
+<span id="testenvironment-infrastructure-usefulresources"></span><h2><a class="toc-backref" href="#id19" role="doc-backlink">Useful Resources</a><a class="headerlink" href="#useful-resources" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/cornell-ece2300">ECE 2300 Labs</a></p></li>
+<li><p><a class="reference external" href="https://github.com/cornell-brg/ece4750-labs-2014">ECE 4750 Labs</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../integration_tests/" class="btn btn-neutral float-left" title="Integration Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../post_silicon/daughter_boards/" class="btn btn-neutral float-right" title="Daughter Boards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Barry Lyu, Parker Schless, Vayun Tiwari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

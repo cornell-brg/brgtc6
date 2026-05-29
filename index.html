@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRGTC6 Documentation &mdash; BRGTC6  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="_static/css/logo.css?v=0320fe47" />
+      <link rel="stylesheet" type="text/css" href="_static/css/table.css?v=09be579f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/image.css?v=c42c1b78" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=187304be"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="_static/togglebutton.js?v=b8b12719"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex/" />
+    <link rel="search" title="Search" href="search/" />
+    <link rel="next" title="Background Information" href="background/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            BRGTC6
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Background Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="background/">Background Information</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RTL Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rtl_design/rtl_design/">RTL Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rtl_design/design_overview/">BRGTC6 RTL Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rtl_design/config_interface/">BRGTC6 Config Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Design Verification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="verification/verification/">Design Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verification/integration_tests/">Integration Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verification/test_environment/">Test Environment/Infrastructure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Post-Silicon Validation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="post_silicon/daughter_boards/">Daughter Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_silicon/tester_board/">Tester Board</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">BRGTC6</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BRGTC6 Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cornell-brg/brgtc6/blob/main/docs/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="brgtc6-documentation">
+<h1>BRGTC6 Documentation<a class="headerlink" href="#brgtc6-documentation" title="Link to this heading"></a></h1>
+<p>This is the home for BRGTC6’s documentation, covering the RTL design,
+design verification, physical design, and post-silicon validation of the
+BRGTC6 source-synchronous parallel chip-to-chip link.</p>
+<section id="project-directory-structure">
+<span id="brgtc6-projectdirectorystructure"></span><h2>Project Directory Structure<a class="headerlink" href="#project-directory-structure" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">brgtc6/</div>
+<div class="line">├─ .github/workflows/</div>
+<div class="line">├─ docs/</div>
+<div class="line">├─ fpga/</div>
+<div class="line">├─ local/</div>
+<div class="line">├─ scripts/</div>
+<div class="line">├─ src/</div>
+<div class="line">│  ├─ asyncfifo/</div>
+<div class="line">│  ├─ common/</div>
+<div class="line">│  ├─ config/</div>
+<div class="line">│  ├─ crc/</div>
+<div class="line">│  ├─ credit/</div>
+<div class="line">│  ├─ pattern/</div>
+<div class="line">│  ├─ repair/</div>
+<div class="line">│  ├─ spi/</div>
+<div class="line">│  ├─ top-full/</div>
+<div class="line">├─ test/</div>
+<div class="line">│  ├─ integration/</div>
+<div class="line">│  ├─ unit/</div>
+<div class="line">│  ├─ utils/</div>
+<div class="line">├─ README.md</div>
+</div>
+</section>
+<section id="overview">
+<span id="brgtc6-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This is the home page for the BRGTC6 (Chip2Chip) project. In this project, we built a performant chip-to-chip communication interface. The taped-out test chip is a 1 mm², 200 MHz design in TSMC 65nm, and it achieved a throughput of 1.6 Gb/s at 200 MT/s in post-silicon testing.</p>
+<p>Work in the project involved:</p>
+<ul class="simple">
+<li><p>Designing a modular, performant, and open-source communication interface</p></li>
+<li><p>Developing thoroughly tested RTL components</p></li>
+<li><p>Setting up the TSMC 65nm PDK on the BRG server</p></li>
+<li><p>Taping out a test chip in TSMC 65nm to demonstrate and validate our interface</p></li>
+</ul>
+<p>GitHub page: <a class="reference external" href="https://github.com/cornell-brg/brgtc6">BRGTC6 Repo</a></p>
+<p>Full project report: <a class="reference external" href="https://www.csl.cornell.edu/~cbatten/pdfs/lyu-brgtc6-cureport2025.pdf">BRGTC6: Source-Synchronous Parallel Chip-to-Chip Link</a></p>
+<a class="reference internal image-reference" href="_images/brgtc6_block.png"><img alt="BRGTC6 block diagram" src="_images/brgtc6_block.png" style="width: 468px;" />
+</a>
+</section>
+<section id="timeline">
+<span id="brgtc6-timeline"></span><h2>Timeline<a class="headerlink" href="#timeline" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>2024<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Jun 14 - Barry Lyu started working on the project</p></li>
+<li><p>Jul 25 - Initial FPGA to FPGA demo</p></li>
+<li><p>Aug 05 - First full architectural draft</p></li>
+<li><p>Sep 18 - Parker Schless and Vayun Tiwari joined the project</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>2025<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Jan 8 - V4 sent for tapeout</p></li>
+<li><p>Spring - Chips received from fab</p></li>
+<li><p>Chips successfully tested</p></li>
+</ul>
+</section>
+</section>
+<section id="future-investigations-revisions">
+<span id="brgtc6-futureinvestigations"></span><h2>Future Investigations / Revisions<a class="headerlink" href="#future-investigations-revisions" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Verification</p>
+<ul>
+<li><p>Encapsulate testing system as a Verilog package so that it is portable</p></li>
+<li><p>Allow for test case reuse across various modules</p></li>
+<li><p>Handle build dependencies (do not recompile if nothing changed) for Verilator tests - see Aidan McNay’s Blimp project</p></li>
+</ul>
+</li>
+<li><p>RTL</p>
+<ul>
+<li><p>Use modports and interfaces to encapsulate val/rdy and credit signals</p></li>
+</ul>
+</li>
+<li><p>PD</p>
+<ul>
+<li><p>Add different standard views each configurable via a yaml file (e.g. for different corners, threshold voltages, etc.)</p></li>
+<li><p>Support different MMMC corners during PnR</p></li>
+</ul>
+</li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Background Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="background/">Background Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="background/#objective">Objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background/#fundamentals">Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background/#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background/#codebase">Codebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background/#pdk-flow">PDK &amp; Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background/#design-methodology">Design Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background/#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">RTL Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rtl_design/rtl_design/">RTL Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rtl_design/rtl_design/#source-directory-structure">Source Directory Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rtl_design/design_overview/">BRGTC6 RTL Design Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rtl_design/design_overview/#spi-and-config-interface">SPI and Config Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rtl_design/design_overview/#link-specification">Link Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rtl_design/design_overview/#link-peripherals">Link Peripherals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rtl_design/config_interface/">BRGTC6 Config Interface</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Design Verification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="verification/verification/">Design Verification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verification/verification/#test-cases">Test Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/verification/#test-directory-structure">Test Directory Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="verification/integration_tests/">Integration Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verification/integration_tests/#standard-integration-tests-duallinkv4-test-sv">Standard Integration Tests (DualLinkV4-test.sv)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/integration_tests/#backpressure-integration-tests-duallinkv4backpressure-test-sv">Backpressure Integration Tests (DualLinkV4Backpressure-test.sv)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="verification/test_environment/">Test Environment/Infrastructure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verification/test_environment/#testbench-structure">Testbench Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/test_environment/#testing-modes-and-running-tests">Testing Modes and Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/test_environment/#cmakelists-file">CMakeLists File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/test_environment/#parameterization">Parameterization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/test_environment/#controlled-randomization">Controlled Randomization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/test_environment/#github-actions">GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/test_environment/#useful-resources">Useful Resources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Post-Silicon Validation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="post_silicon/daughter_boards/">Daughter Boards</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/daughter_boards/#links">Links</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="post_silicon/tester_board/">Tester Board</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/tester_board/#abstract">Abstract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/tester_board/#design-requirements">Design Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/tester_board/#high-level-description">High-Level Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/tester_board/#detailed-hardware-description">Detailed Hardware Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/tester_board/#detailed-software-description">Detailed Software Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/tester_board/#current-status-known-issues">Current Status/Known Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_silicon/tester_board/#appendix-links">Appendix/Links</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="background/" class="btn btn-neutral float-right" title="Background Information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Barry Lyu, Parker Schless, Vayun Tiwari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
